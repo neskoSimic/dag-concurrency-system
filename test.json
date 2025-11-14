@@ -1,0 +1,30 @@
+{
+  "capacity": { "CPU": 2, "RAM": 0 },
+  "targets": ["T3"],
+  "nodes": [
+    {
+      "id": "T1",
+      "deps": [],
+      "action": { "type": "py", "code": "open('out1.txt','w').write('T1')" },
+      "resources": { "CPU": 1, "RAM": 0 },
+      "inputs": [],
+      "outputs": ["out1.txt"]
+    },
+    {
+      "id": "T2",
+      "deps": ["T1"],
+      "action": { "type": "py", "code": "import time; time.sleep(5); open('out2.txt','w').write('T2 after '+open('out1.txt').read())" },
+      "resources": { "CPU": 1, "RAM": 0 },
+      "inputs": ["out1.txt"],
+      "outputs": ["out2.txt"]
+    },
+    {
+      "id": "T3",
+      "deps": ["T2"],
+      "action": null,
+      "resources": { "CPU": 0, "RAM": 0 },
+      "inputs": ["out2.txt"],
+      "outputs": []
+    }
+  ]
+}

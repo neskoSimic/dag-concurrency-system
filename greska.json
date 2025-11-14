@@ -1,0 +1,8 @@
+{
+  "capacity": { "CPU": 1, "RAM": 0 },
+  "targets": ["T1"],
+  "nodes": [
+    { "id": "T1", "deps": [], "action": { "type": "py", "code": "print('x')" },
+      "resources": { "CPU": 2, "RAM": 0 }, "inputs": [], "outputs": [] }
+  ]
+}
