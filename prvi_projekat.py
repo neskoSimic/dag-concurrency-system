@@ -93,7 +93,7 @@ class CommandInterface:
             stack = set()
 
         if target_id in stack:
-            # ciklus u zavisnostima
+            # ciklus u zavisnostima,da nema beskonacne rekurzije
             raise ValueError(f"Detektovan ciklus u zavisnostima (node: {target_id})")
 
         if target_id in visited:
@@ -902,7 +902,8 @@ class RafProcessPool:
                 finally:
                     with self._lock:
                         self._active-=1
-        self.terminate()
+        self._pool.terminate()
+        self._pool.join()
 
     def num_active(self) -> int:
         with self._lock:
